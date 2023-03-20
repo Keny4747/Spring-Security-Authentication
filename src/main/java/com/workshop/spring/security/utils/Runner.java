@@ -34,9 +34,9 @@ public class Runner implements CommandLineRunner {
         if (this.userRepository.count() == 0) {
             var encoders = PasswordEncoderFactories.createDelegatingPasswordEncoder();
             this.userRepository.saveAll(List.of(
-                            new User("uncledave", encoders.encode("UncleDave123"), List.of(this.authorityRepository.findByName(AuthorityName.ADMIN).get())),
-                            new User("user01", "User01123", List.of(this.authorityRepository.findByName(AuthorityName.READ).get())),
-                            new User("user02", "User02123", List.of(this.authorityRepository.findByName(AuthorityName.WRITE).get()))
+                            new User("keny", encoders.encode("12345"), List.of(this.authorityRepository.findByName(AuthorityName.ADMIN).get())),
+                            new User("alexandra",encoders.encode("123") , List.of(this.authorityRepository.findByName(AuthorityName.READ).get())),
+                            new User("user", "user", List.of(this.authorityRepository.findByName(AuthorityName.WRITE).get()))
                     )
             );
         }
