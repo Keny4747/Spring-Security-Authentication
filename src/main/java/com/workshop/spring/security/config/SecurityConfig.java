@@ -11,6 +11,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 public class SecurityConfig {
 
+    /*
     @Bean
     public UserDetailsService userDetailsService(){
         var user = User.withUsername("keny")
@@ -21,6 +22,8 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(user);
 
     }
+
+     */
 
     @Bean
     public PasswordEncoder passwordEncoder(){

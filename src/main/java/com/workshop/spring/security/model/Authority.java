@@ -4,7 +4,7 @@ import com.workshop.spring.security.utils.AuthorityName;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-@Entity
+@Entity(name ="authorities")
 @Data
 @NoArgsConstructor
 public class Authority {

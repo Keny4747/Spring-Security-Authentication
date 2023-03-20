@@ -1,5 +1,6 @@
 package com.workshop.spring.security.security;
 
+import com.workshop.spring.security.model.Authority;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -23,7 +24,9 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getAuthorities().stream().map(SecurityAuthority::new).toList();
+        return user.getAuthorities().stream()
+                .map(authority -> new SecurityAuthority((Authority) authority))
+                .toList();
     }
 
     @Override

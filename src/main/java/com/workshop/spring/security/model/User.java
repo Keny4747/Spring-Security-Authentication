@@ -15,7 +15,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String userName;
+    private String username;
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -24,8 +24,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private List<Authority> authorities;
 
-    public User(String userName, String password, List<Authority> authorities) {
-        this.userName = userName;
+    public User(String username, String password, List<Authority> authorities) {
+        this.username = username;
         this.password = password;
         this.authorities = authorities;
     }
