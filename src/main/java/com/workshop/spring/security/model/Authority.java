@@ -3,20 +3,23 @@ package com.workshop.spring.security.model;
 import com.workshop.spring.security.utils.AuthorityName;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-@Entity(name ="authorities")
-@Data
+import lombok.Setter;
+
+@Getter
+@Setter
 @NoArgsConstructor
+@Entity(name = "authorities")
 public class Authority {
+    public Authority(AuthorityName authorityName) {
+        this.name = authorityName;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
     private AuthorityName name;
-
-    public Authority(AuthorityName authorityName){
-        this.name = authorityName;
-    }
-
 }

@@ -1,9 +1,9 @@
 package com.workshop.spring.security.security;
 
 import com.workshop.spring.security.model.Authority;
+import com.workshop.spring.security.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -14,19 +14,18 @@ public class SecurityUser implements UserDetails {
     private final User user;
 
     @Override
-    public String getUsername() {
-        return user.getUsername();
-    }
-    @Override
     public String getPassword() {
         return user.getPassword();
     }
 
     @Override
+    public String getUsername() {
+        return user.getUsername();
+    }
+
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getAuthorities().stream()
-                .map(authority -> new SecurityAuthority((Authority) authority))
-                .toList();
+        return user.getAuthorities().stream().map(SecurityAuthority::new).toList();
     }
 
     @Override

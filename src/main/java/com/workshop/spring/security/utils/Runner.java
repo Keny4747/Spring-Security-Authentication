@@ -5,6 +5,7 @@ import com.workshop.spring.security.model.User;
 import com.workshop.spring.security.repository.AuthorityRepository;
 import com.workshop.spring.security.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,7 +22,8 @@ public class Runner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if(this.authorityRepository.count()==0){
+
+        if (this.authorityRepository.count() == 0) {
             this.authorityRepository.saveAll(List.of(
                     new Authority(AuthorityName.ADMIN),
                     new Authority(AuthorityName.READ),
@@ -29,12 +31,14 @@ public class Runner implements CommandLineRunner {
             ));
         }
 
-        if(this.userRepository.count()==0){
+        if (this.userRepository.count() == 0) {
+            var encoders = PasswordEncoderFactories.createDelegatingPasswordEncoder();
             this.userRepository.saveAll(List.of(
-                    new User("keny","12345",List.of(this.authorityRepository.findByName(AuthorityName.ADMIN).get())),
-                    new User("alexandra","12345",List.of(this.authorityRepository.findByName(AuthorityName.READ).get())),
-                    new User("majo","12345",List.of(this.authorityRepository.findByName(AuthorityName.WRITE).get()))
-            ));
+                            new User("uncledave", encoders.encode("UncleDave123"), List.of(this.authorityRepository.findByName(AuthorityName.ADMIN).get())),
+                            new User("user01", "User01123", List.of(this.authorityRepository.findByName(AuthorityName.READ).get())),
+                            new User("user02", "User02123", List.of(this.authorityRepository.findByName(AuthorityName.WRITE).get()))
+                    )
+            );
         }
     }
 }
